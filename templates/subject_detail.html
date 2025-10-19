@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ subject.name }}</h2>
+<div class="tabs">
+  <button class="tab active" data-target="#tab-topics">Topics</button>
+  <button class="tab" data-target="#tab-videos">Videos</button>
+  <button class="tab" data-target="#tab-files">Files</button>
+  <button class="tab" data-target="#tab-tips">Tips</button>
+  <button class="tab" data-target="#tab-quiz">Quiz</button>
+</div>
+<div id="tab-topics">
+  <div class="grid-3">
+    {% for t in topics %}
+    <article>
+      <header><strong>{{ t.name }}</strong></header>
+      <p>{{ t.description|default:'No description'|truncatechars:140 }}</p>
+    </article>
+    {% empty %}
+    <article>No topics yet.</article>
+    {% endfor %}
+  </div>
+</div>
+<div id="tab-videos" class="hidden">
+  <div class="grid-3">
+    {% for v in videos %}
+    <article>
+      <header><strong>{{ v.title }}</strong></header>
+      {% if v.url %}<p><a href="{{ v.url }}" target="_blank">Open video</a></p>{% endif %}
+      {% if v.file %}<video src="{{ v.file.url }}" controls style="width:100%"></video>{% endif %}
+    </article>
+    {% empty %}
+    <article>No videos yet.</article>
+    {% endfor %}
+  </div>
+</div>
+<div id="tab-files" class="hidden">
+  <div class="grid-3">
+    {% for d in documents %}
+    <article>
+      <header><strong>{{ d.title }}</strong></header>
+      <p><a href="{{ d.file.url }}" target="_blank">Download</a></p>
+    </article>
+    {% empty %}
+    <article>No files yet.</article>
+    {% endfor %}
+  </div>
+</div>
+<div id="tab-tips" class="hidden">
+  <ul>
+    {% for tip in tips %}
+    <li>{{ tip.content }}</li>
+    {% empty %}
+    <li>No tips yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+<div id="tab-quiz" class="hidden">
+  {% if questions %}
+  <form>
+    {% for q in questions %}
+    <fieldset>
+      <legend>{{ forloop.counter }}. {{ q.text }}</legend>
+      {% for opt in q.options.all %}
+      <label>
+        <input type="radio" name="q{{ q.id }}" value="{{ opt.id }}" /> {{ opt.text }}
+      </label><br />
+      {% endfor %}
+    </fieldset>
+    {% endfor %}
+  </form>
+  {% else %}
+  <article>No quiz questions yet.</article>
+  {% endif %}
+</div>
+<script>
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#tab-topics, #tab-videos, #tab-files, #tab-tips, #tab-quiz').forEach(el => el.classList.add('hidden'));
+      btn.classList.add('active');
+      document.querySelector(btn.dataset.target).classList.remove('hidden');
+    });
+  });
+</script>
+{% endblock %}

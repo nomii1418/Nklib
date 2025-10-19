@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mechanical Library</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+  <style>
+    header { margin-bottom: 1rem; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .tabs { display: flex; gap: 0.5rem; margin: 1rem 0; }
+    .tab { padding: 0.5rem 0.75rem; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; }
+    .tab.active { background: #0ea5e9; color: white; border-color: #0ea5e9; }
+    .hidden { display: none; }
+    .side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .progress { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+    .progress > div { height: 8px; width: 0; background: #0ea5e9; }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav>
+      <ul>
+        <li><strong><a href="/">Mechanical Library</a></strong></li>
+      </ul>
+      <ul>
+        <li><a href="/assistant/">AI Assistant</a></li>
+        <li><a href="/admin/">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="container">
+    <small>© {{ now|date:'Y' }} Mechanical Library</small>
+  </footer>
+</body>
+</html>

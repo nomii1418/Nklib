@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>AI Assistant</h2>
+<form id="ask-form">
+  <div class="grid">
+    <input type="text" id="prompt" name="prompt" placeholder="Ask anything in Mechanics..." required />
+    <button type="submit">Ask</button>
+  </div>
+</form>
+<article id="answer" style="white-space: pre-wrap;"></article>
+<script>
+  const form = document.getElementById('ask-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const res = await fetch('/assistant/ask/', { method: 'POST', headers: { 'X-CSRFToken': getCookie('csrftoken') }, body: fd });
+    const data = await res.json();
+    document.getElementById('answer').textContent = data.ok ? data.answer : (data.error || 'Error');
+  });
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+</script>
+{% endblock %}

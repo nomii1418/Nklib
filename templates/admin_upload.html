@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Upload</h2>
+<form id="upload-form">
+  <div class="grid">
+    <label>
+      Subject
+      <select name="subject" id="subject" required>
+        {% for s in subjects %}
+        <option value="{{ s.id }}">{{ s.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      Topic (optional)
+      <select name="topic" id="topic">
+        <option value="">-- none --</option>
+      </select>
+    </label>
+    <label>
+      Kind
+      <select name="kind" required>
+        <option value="document">Document</option>
+        <option value="video">Video</option>
+      </select>
+    </label>
+    <label>
+      Title
+      <input type="text" name="title" placeholder="Title (optional)" />
+    </label>
+    <label>
+      File
+      <input type="file" name="file" id="file" required />
+    </label>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+  <button type="submit">Upload</button>
+</form>
+<article id="result"></article>
+<script>
+  const subjectSel = document.getElementById('subject');
+  const topicSel = document.getElementById('topic');
+  async function loadTopics() {
+    topicSel.innerHTML = '<option value="">-- none --</option>';
+    const slug = subjectSel.options[subjectSel.selectedIndex].textContent;
+    // Minimal: not fetching; keep manual for now.
+  }
+  subjectSel.addEventListener('change', loadTopics);
+  loadTopics();
+
+  const form = document.getElementById('upload-form');
+  const bar = document.getElementById('bar');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/admin/upload/submit/');
+    xhr.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) {
+        const pct = Math.round((e.loaded / e.total) * 100);
+        bar.style.width = pct + '%';
+      }
+    };
+    xhr.onload = () => {
+      try {
+        const data = JSON.parse(xhr.responseText);
+        document.getElementById('result').textContent = data.ok ? ('Uploaded: ' + data.link) : (data.error || 'Error');
+      } catch (err) { document.getElementById('result').textContent = 'Upload error'; }
+    };
+    xhr.onerror = () => { document.getElementById('result').textContent = 'Network error'; };
+    xhr.send(fd);
+  });
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+</script>
+{% endblock %}

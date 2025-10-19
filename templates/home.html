@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Subjects</h2>
+<div class="grid-4">
+  {% for s in subjects %}
+  <article>
+    <header><strong>{{ s.name }}</strong></header>
+    <p>{{ s.description|default:'No description'|truncatechars:120 }}</p>
+    <footer><a href="/subject/{{ s.slug }}/" role="button">Open</a></footer>
+  </article>
+  {% empty %}
+  <article>No subjects yet. Admin can add via /admin or Telegram bot.</article>
+  {% endfor %}
+</div>
+{% endblock %}
