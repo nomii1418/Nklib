@@ -8,8 +8,8 @@ Deploy to free hosting platforms in minutes!
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/nomii1418/Nklib)
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/mechanical-library)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/mechanical-library)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/mechanical-library)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nomii1418/Nklib)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/nomii1418/Nklib)
 
 **See [README_DEPLOY.md](README_DEPLOY.md) for detailed deployment instructions!**
 
