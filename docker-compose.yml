@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mechanical_library_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=mechanical_library
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: mechanical_library_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/workspace/uploads
+      - ./backend:/app
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=mechanical_library
+      - SECRET_KEY=your-secret-key-change-in-production
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ADMIN_USERNAME=nk28
+      - ADMIN_PASSWORD=nom
+      - FRONTEND_URL=http://localhost:3000
+      - BACKEND_URL=http://localhost:8000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: mechanical_library_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./bot
+      dockerfile: Dockerfile
+    container_name: mechanical_library_bot
+    volumes:
+      - ./bot:/app
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - BACKEND_URL=http://backend:8000
+      - ADMIN_USERNAME=nk28
+      - ADMIN_PASSWORD=nom
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
