@@ -5,7 +5,7 @@
 ### 🟢 Option 1: Render (Recommended)
 **Deploy backend + bot in one click!**
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/yourusername/mechanical-library)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/nomii1418/Nklib)
 
 **What you need:**
 - MongoDB Atlas URL (free at mongodb.com/cloud/atlas)
@@ -40,7 +40,7 @@
 ### ▲ Option 3: Vercel (Frontend Only)
 **Deploy your website frontend!**
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/mechanical-library&project-name=mechanical-library)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nomii1418/Nklib&project-name=mechanical-library)
 
 **Use with:** Render backend or Railway
 
@@ -49,7 +49,7 @@
 ### 🌐 Option 4: Netlify (Frontend Only)
 **Alternative frontend deployment!**
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/yourusername/mechanical-library)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/nomii1418/Nklib)
 
 ---
 
