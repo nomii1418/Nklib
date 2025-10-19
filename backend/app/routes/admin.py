@@ -227,38 +227,42 @@ async def create_file(
     order: int = Form(0),
     current_user: dict = Depends(get_admin_user)
 ):
+    from ..cloudinary_config import upload_file_to_cloudinary
+    
     db = get_database()
     
-    # Create uploads directory if it doesn't exist
-    upload_dir = "/workspace/uploads"
-    os.makedirs(upload_dir, exist_ok=True)
-    
-    # Save file
-    file_path = os.path.join(upload_dir, file.filename)
-    async with aiofiles.open(file_path, 'wb') as out_file:
-        content = await file.read()
-        await out_file.write(content)
-    
+    # Read file content
+    content = await file.read()
     file_size = len(content)
-    download_url = f"/api/files/download/{file.filename}"
     
-    file_doc = {
-        "subject_id": subject_id,
-        "topic_id": topic_id,
-        "title": title,
-        "description": description,
-        "filename": file.filename,
-        "filepath": file_path,
-        "file_type": file.content_type,
-        "file_size": file_size,
-        "download_url": download_url,
-        "order": order,
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow()
-    }
-    result = await db.files.insert_one(file_doc)
-    file_doc["_id"] = str(result.inserted_id)
-    return file_doc
+    # Upload to Cloudinary
+    try:
+        cloudinary_result = await upload_file_to_cloudinary(
+            content,
+            file.filename,
+            folder=f"mechanical_library/{subject_id}"
+        )
+        
+        file_doc = {
+            "subject_id": subject_id,
+            "topic_id": topic_id,
+            "title": title,
+            "description": description,
+            "filename": file.filename,
+            "cloudinary_url": cloudinary_result["url"],
+            "cloudinary_public_id": cloudinary_result["public_id"],
+            "file_type": file.content_type,
+            "file_size": file_size,
+            "download_url": cloudinary_result["url"],
+            "order": order,
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }
+        result = await db.files.insert_one(file_doc)
+        file_doc["_id"] = str(result.inserted_id)
+        return file_doc
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"File upload failed: {str(e)}")
 
 @router.put("/files/{file_id}")
 async def update_file(
@@ -271,6 +275,8 @@ async def update_file(
     file: Optional[UploadFile] = File(None),
     current_user: dict = Depends(get_admin_user)
 ):
+    from ..cloudinary_config import upload_file_to_cloudinary, delete_file_from_cloudinary
+    
     db = get_database()
     
     update_data = {
@@ -283,24 +289,29 @@ async def update_file(
     }
     
     if file:
-        # Delete old file
+        # Delete old file from Cloudinary
         old_file = await db.files.find_one({"_id": ObjectId(file_id)})
-        if old_file and os.path.exists(old_file["filepath"]):
-            os.remove(old_file["filepath"])
+        if old_file and old_file.get("cloudinary_public_id"):
+            try:
+                await delete_file_from_cloudinary(old_file["cloudinary_public_id"])
+            except:
+                pass  # Continue even if deletion fails
         
-        # Save new file
-        upload_dir = "/workspace/uploads"
-        file_path = os.path.join(upload_dir, file.filename)
-        async with aiofiles.open(file_path, 'wb') as out_file:
-            content = await file.read()
-            await out_file.write(content)
+        # Upload new file to Cloudinary
+        content = await file.read()
+        cloudinary_result = await upload_file_to_cloudinary(
+            content,
+            file.filename,
+            folder=f"mechanical_library/{subject_id}"
+        )
         
         update_data.update({
             "filename": file.filename,
-            "filepath": file_path,
+            "cloudinary_url": cloudinary_result["url"],
+            "cloudinary_public_id": cloudinary_result["public_id"],
             "file_type": file.content_type,
             "file_size": len(content),
-            "download_url": f"/api/files/download/{file.filename}"
+            "download_url": cloudinary_result["url"]
         })
     
     result = await db.files.update_one(
@@ -316,14 +327,20 @@ async def delete_file(
     file_id: str,
     current_user: dict = Depends(get_admin_user)
 ):
+    from ..cloudinary_config import delete_file_from_cloudinary
+    
     db = get_database()
     file_doc = await db.files.find_one({"_id": ObjectId(file_id)})
     if not file_doc:
         raise HTTPException(status_code=404, detail="File not found")
     
-    # Delete file from disk
-    if os.path.exists(file_doc["filepath"]):
-        os.remove(file_doc["filepath"])
+    # Delete file from Cloudinary
+    if file_doc.get("cloudinary_public_id"):
+        try:
+            await delete_file_from_cloudinary(file_doc["cloudinary_public_id"])
+        except Exception as e:
+            print(f"Failed to delete from Cloudinary: {e}")
+            # Continue deletion from database even if Cloudinary fails
     
     await db.files.delete_one({"_id": ObjectId(file_id)})
     return {"message": "File deleted successfully"}

@@ -24,6 +24,7 @@ TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "nk28")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "nom")
+ADMIN_TELEGRAM_ID = os.getenv("ADMIN_TELEGRAM_ID", "6056498996")
 
 # Conversation states
 (ADMIN_LOGIN, ADMIN_MENU, ADD_SUBJECT, ADD_TOPIC, ADD_VIDEO, 
@@ -81,6 +82,15 @@ async def admin_login_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     telegram_id = str(query.from_user.id)
     
+    # Check if user is authorized admin
+    if telegram_id != ADMIN_TELEGRAM_ID:
+        await query.edit_message_text(
+            "❌ Unauthorized access!\n\n"
+            "Only the admin can access this panel.\n"
+            f"Your Telegram ID: {telegram_id}"
+        )
+        return
+    
     # Auto-login for admin
     token = await get_admin_token(telegram_id)
     if token:
@@ -94,7 +104,7 @@ async def show_admin_menu(query, context: ContextTypes.DEFAULT_TYPE):
         [InlineKeyboardButton("➕ Add Subject", callback_data="admin_add_subject")],
         [InlineKeyboardButton("➕ Add Topic", callback_data="admin_add_topic")],
         [InlineKeyboardButton("➕ Add Video", callback_data="admin_add_video")],
-        [InlineKeyboardButton("📁 Upload File", callback_data="admin_upload_file")],
+        [InlineKeyboardButton("📁 Upload File (Cloudinary)", callback_data="admin_upload_file")],
         [InlineKeyboardButton("➕ Add Quiz", callback_data="admin_add_quiz")],
         [InlineKeyboardButton("➕ Add Tip", callback_data="admin_add_tip")],
         [InlineKeyboardButton("✏️ Edit Content", callback_data="admin_edit")],
@@ -103,9 +113,13 @@ async def show_admin_menu(query, context: ContextTypes.DEFAULT_TYPE):
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
+    user = query.from_user
     await query.edit_message_text(
-        "👨‍💼 Admin Control Panel\n\n"
-        "Manage all platform content:",
+        f"👨‍💼 Admin Control Panel\n\n"
+        f"Welcome, {user.first_name}!\n"
+        f"Telegram ID: {user.id}\n\n"
+        f"Manage all platform content:\n"
+        f"📤 Files are stored on Cloudinary (25GB free)",
         reply_markup=reply_markup
     )
 

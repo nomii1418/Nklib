@@ -27,7 +27,15 @@ services:
       - key: ADMIN_USERNAME
         value: nk28
       - key: ADMIN_PASSWORD
-        value: nom
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
       - key: FRONTEND_URL
         sync: false
       - key: BACKEND_URL
@@ -53,7 +61,9 @@ services:
       - key: ADMIN_USERNAME
         value: nk28
       - key: ADMIN_PASSWORD
-        value: nom
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
 
 databases:
   # Note: Render doesn't provide free MongoDB, use MongoDB Atlas instead
