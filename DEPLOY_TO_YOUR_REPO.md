@@ -107,11 +107,14 @@ SAVE THIS! ✍️
    → Connect Repository: nomii1418/Nklib
    → Name: nklib-api
    → Environment: Python 3
-   → Region: Choose closest
    → Branch: main (or your branch)
+   → Root Directory: (leave empty)
    → Build Command: cd backend && pip install -r requirements.txt
    → Start Command: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
    → Plan: Free
+   
+   ⚠️ Note: Do NOT add region for free tier
+   ⚠️ Note: Free tier has ephemeral storage (files are temporary)
    ```
 
 3. **Add Environment Variables**
