@@ -1,0 +1,70 @@
+{
+  "name": "Mechanical Engineering Library",
+  "description": "A comprehensive learning platform for mechanical engineering students with website and Telegram bot",
+  "repository": "https://github.com/yourusername/mechanical-library",
+  "logo": "https://cdn-icons-png.flaticon.com/512/3074/3074767.png",
+  "keywords": ["mechanical-engineering", "education", "learning", "telegram-bot", "fastapi", "react"],
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "echo 'Deployment successful! Configure MongoDB Atlas and Telegram bot token.'"
+  },
+  "env": {
+    "MONGODB_URL": {
+      "description": "MongoDB connection string (use MongoDB Atlas free tier)",
+      "value": "mongodb+srv://username:password@cluster.mongodb.net/mechanical_library",
+      "required": true
+    },
+    "DATABASE_NAME": {
+      "description": "MongoDB database name",
+      "value": "mechanical_library",
+      "required": true
+    },
+    "SECRET_KEY": {
+      "description": "Secret key for JWT tokens",
+      "generator": "secret",
+      "required": true
+    },
+    "TELEGRAM_BOT_TOKEN": {
+      "description": "Telegram bot token from @BotFather",
+      "required": true
+    },
+    "ADMIN_USERNAME": {
+      "description": "Admin username",
+      "value": "nk28",
+      "required": true
+    },
+    "ADMIN_PASSWORD": {
+      "description": "Admin password (change this!)",
+      "value": "nom",
+      "required": true
+    },
+    "FRONTEND_URL": {
+      "description": "Frontend URL (will be set after deployment)",
+      "required": false
+    },
+    "BACKEND_URL": {
+      "description": "Backend URL (will be set after deployment)",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "stack": "heroku-22"
+}

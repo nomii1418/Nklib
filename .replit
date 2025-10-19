@@ -1,0 +1,27 @@
+# Replit Configuration
+run = "bash start.sh"
+language = "python3"
+
+[nix]
+channel = "stable-22_11"
+
+[env]
+PYTHONPATH = "/workspace/backend"
+
+[packager]
+language = "python3"
+
+[packager.features]
+enabledForHosting = false
+packageSearch = true
+guessImports = true
+
+[languages.python3]
+pattern = "**/*.py"
+
+[languages.python3.languageServer]
+start = "pylsp"
+
+[deployment]
+run = ["sh", "-c", "bash start.sh"]
+deploymentTarget = "cloudrun"
