@@ -1,10 +1,11 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from passlib.context import CryptContext
-from jose import JWTError, jwt
+import jwt
 from datetime import datetime, timedelta
 from typing import Optional
 import os
+import hashlib
+import secrets
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -13,14 +14,37 @@ SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30 * 24 * 60  # 30 days
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
 
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """Verify password using PBKDF2 (pure Python, no Rust needed)"""
+    # Extract salt and hash from stored password
+    parts = hashed_password.split('$')
+    if len(parts) != 2:
+        return False
+    salt, stored_hash = parts
+    # Hash the plain password with the same salt
+    computed_hash = hashlib.pbkdf2_hmac(
+        'sha256',
+        plain_password.encode('utf-8'),
+        salt.encode('utf-8'),
+        100000  # iterations
+    ).hex()
+    return secrets.compare_digest(computed_hash, stored_hash)
 
-def get_password_hash(password):
-    return pwd_context.hash(password)
+def get_password_hash(password: str) -> str:
+    """Hash password using PBKDF2 (pure Python, no Rust needed)"""
+    # Generate a random salt
+    salt = secrets.token_hex(16)
+    # Hash the password with PBKDF2
+    pwd_hash = hashlib.pbkdf2_hmac(
+        'sha256',
+        password.encode('utf-8'),
+        salt.encode('utf-8'),
+        100000  # iterations
+    ).hex()
+    # Return salt and hash combined
+    return f"{salt}${pwd_hash}"
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
@@ -45,7 +69,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         if username is None:
             raise credentials_exception
         return {"username": username, "is_admin": payload.get("is_admin", False)}
-    except JWTError:
+    except jwt.InvalidTokenError:
         raise credentials_exception
 
 async def get_admin_user(current_user: dict = Depends(get_current_user)):
