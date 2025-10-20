@@ -1,0 +1,155 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║          FINAL ENVIRONMENT VARIABLES - YOUR CREDENTIALS              ║
+║                     COPY & PASTE INTO RENDER                         ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+🔧 BACKEND SERVICE (nklib-api) - 10 Variables
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ MONGODB_URL (READY!)
+mongodb+srv://nk:nk1418$K@cluster0.ffrsd03.mongodb.net/mechanical_library?retryWrites=true&w=majority&appName=Cluster0
+
+Note: If connection fails, try URL-encoded password:
+mongodb+srv://nk:nk1418%24K@cluster0.ffrsd03.mongodb.net/mechanical_library?retryWrites=true&w=majority&appName=Cluster0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ TELEGRAM_BOT_TOKEN (READY!)
+8278723486:AAGpdNwck6Ud2YBvsnMLnaZBM9gTQL45hhY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ SECRET_KEY
+(Click "Generate" button in Render - it will create random value)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ DATABASE_NAME
+mechanical_library
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADMIN_USERNAME
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  ADMIN_PASSWORD
+(Choose a SECURE password - NOT "nom"!)
+Example: MySecurePass123@
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADMIN_TELEGRAM_ID
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ CLOUDINARY_CLOUD_NAME (Get from cloudinary.com)
+(Example: dxyz123)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ CLOUDINARY_API_KEY (Get from cloudinary.com)
+(Example: 123456789012345)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏳ CLOUDINARY_API_SECRET (Get from cloudinary.com)
+(Example: abcdefghijklmnopqrstuvwxyz)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 BOT WORKER (nklib-bot) - 5 Variables
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ TELEGRAM_BOT_TOKEN
+8278723486:AAGpdNwck6Ud2YBvsnMLnaZBM9gTQL45hhY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 BACKEND_URL (Will have this after backend deploys)
+https://nklib-api.onrender.com
+(Or your actual backend URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADMIN_USERNAME
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  ADMIN_PASSWORD
+(Same password you used in backend)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ADMIN_TELEGRAM_ID
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📌 FRONTEND (Vercel) - 1 Variable
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VITE_API_URL
+https://nklib-api.onrender.com
+(Or your actual backend URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 AFTER FIRST DEPLOYMENT - Add These to Backend:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FRONTEND_URL
+https://nklib.vercel.app
+(Or your actual Vercel URL)
+
+BACKEND_URL
+https://nklib-api.onrender.com
+(Your actual backend URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ READY STATUS:
+
+MongoDB: ✅ READY
+Bot Token: ✅ READY
+Admin ID: ✅ READY
+Cloudinary: ⏳ NEED (2 minutes to get)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 NEXT STEP:
+
+1. Get Cloudinary credentials (2 min)
+   → https://cloudinary.com/users/register/free
+   
+2. Copy all variables above
+
+3. Paste into Render when deploying
+
+4. You're LIVE! 🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 YOUR BOT:
+
+Token: 8278723486:AAGpdNwck6Ud2YBvsnMLnaZBM9gTQL45hhY
+Admin: 6056498996 (You!)
+Access: Only you can use admin panel
+
+To find your bot:
+- Check @BotFather messages for bot username
+- Or: t.me/your_bot_username
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Time to deploy: 12 minutes
+Cost: $0/month
+
+Let's go! 🚀
