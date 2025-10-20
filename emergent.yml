@@ -1,3 +1,13 @@
 {
-  "env_image_name": "fastapi_react_mongo_shadcn_base_image_cloud_arm:release-13102025-1"
+  "env_image_name": "fastapi_react_mongo_shadcn_base_image_cloud_arm:release-13102025-1",
+  "env_vars": {
+    "CARGO_HOME": "/tmp/cargo",
+    "CARGO_TARGET_DIR": "/tmp/cargo-target",
+    "PIP_NO_BUILD_ISOLATION": "false",
+    "PIP_NO_CACHE_DIR": "false"
+  },
+  "setup_commands": [
+    "mkdir -p /tmp/cargo /tmp/cargo-target",
+    "chmod -R 777 /tmp/cargo /tmp/cargo-target"
+  ]
 }
