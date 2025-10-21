@@ -1,14 +1,33 @@
+# Core Framework - Pure Python
 fastapi==0.104.1
 uvicorn==0.24.0
+
+# Database - Pure Python
 motor==3.3.2
 pymongo==4.6.0
+
+# File Upload - Pure Python
 python-multipart==0.0.6
-PyJWT==2.8.0
-passlib==1.7.4
-python-telegram-bot==20.7
 aiofiles==23.2.1
+
+# Authentication - Pure Python (NO cryptography, NO bcrypt)
+PyJWT==2.8.0
+
+# HTTP Client - Pure Python
 httpx==0.25.2
+
+# Data Validation - Pure Python
 pydantic==2.5.0
 pydantic-settings==2.1.0
+
+# Environment - Pure Python
 python-dotenv==1.0.0
-cloudinary==1.36.0
+
+# Cloudinary - Pure Python
+cloudinary==1.40.0
+urllib3==1.26.18
+certifi==2023.7.22
+six==1.16.0
+
+# Telegram Bot - Pure Python
+python-telegram-bot==20.7
