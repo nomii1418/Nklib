@@ -1,0 +1,187 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║          🚀 COPY & PASTE DEPLOYMENT - ALL CREDENTIALS READY          ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+✅ ALL CREDENTIALS COMPLETE - READY TO DEPLOY!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 RENDER BACKEND - ENVIRONMENT VARIABLES
+
+Go to: https://dashboard.render.com
+New → Web Service → nomii1418/Nklib
+
+Settings:
+Name: nklib-api
+Build: cd backend && pip install -r requirements.txt
+Start: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+Add these 10 variables (click "Add Environment Variable" for each):
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MONGODB_URL
+mongodb+srv://nk:nk1418$K@cluster0.ffrsd03.mongodb.net/mechanical_library?retryWrites=true&w=majority&appName=Cluster0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TELEGRAM_BOT_TOKEN
+8278723486:AAGpdNwck6Ud2YBvsnMLnaZBM9gTQL45hhY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SECRET_KEY
+(Click "Generate" button in Render)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DATABASE_NAME
+mechanical_library
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_USERNAME
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_PASSWORD
+YourSecurePassword123
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_TELEGRAM_ID
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLOUDINARY_CLOUD_NAME
+dr7fbw6e6
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLOUDINARY_API_KEY
+182183354839288
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CLOUDINARY_API_SECRET
+AVMd7zlB80aq49LGC8YrLZpEnlA
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Then: Click "Create Web Service"
+Wait: 5-10 minutes
+Save: Your backend URL (example: https://nklib-api.onrender.com)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 RENDER BOT WORKER - ENVIRONMENT VARIABLES
+
+New → Background Worker → Same repository
+
+Settings:
+Name: nklib-bot
+Build: pip install -r bot/requirements.txt
+Start: python bot/telegram_bot.py
+
+Add these 5 variables:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TELEGRAM_BOT_TOKEN
+8278723486:AAGpdNwck6Ud2YBvsnMLnaZBM9gTQL45hhY
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BACKEND_URL
+https://nklib-api.onrender.com
+(Use YOUR backend URL from above)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_USERNAME
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_PASSWORD
+YourSecurePassword123
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADMIN_TELEGRAM_ID
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Then: Click "Create Background Worker"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌐 VERCEL FRONTEND - ENVIRONMENT VARIABLE
+
+Go to: https://vercel.com
+Import: nomii1418/Nklib
+Root Directory: frontend
+
+Add this 1 variable:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VITE_API_URL
+https://nklib-api.onrender.com
+(Use YOUR backend URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Then: Click "Deploy"
+Wait: 2 minutes
+Save: Your frontend URL (example: https://nklib.vercel.app)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔄 UPDATE BACKEND WITH URLs
+
+Go back to: Render → nklib-api → Environment
+Add 2 more variables:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FRONTEND_URL
+https://nklib.vercel.app
+(Use YOUR Vercel URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+BACKEND_URL
+https://nklib-api.onrender.com
+(Your backend URL)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Then: Click "Save Changes"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ YOU'RE LIVE!
+
+Website: https://nklib.vercel.app
+Backend: https://nklib-api.onrender.com
+Bot: @your_bot_username (check @BotFather)
+
+Login:
+Username: nk28
+Password: YourSecurePassword123
+
+Bot Admin: Only you (6056498996)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Cost: $0/month
+Storage: 25GB Cloudinary + 512MB MongoDB
+Features: ALL working!
+
+🎉 Your mechanical engineering library is LIVE! 🎓🚀
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

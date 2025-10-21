@@ -1,0 +1,74 @@
+# Render Blueprint for One-Click Deployment
+# This file enables one-click deployment to Render
+# Just click: https://render.com/deploy
+
+services:
+  # Backend API
+  - type: web
+    name: mechanical-library-api
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "cd backend && pip install --no-cache-dir --upgrade pip setuptools wheel && pip install --no-cache-dir -r requirements.txt"
+    startCommand: "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: MONGODB_URL
+        sync: false
+      - key: DATABASE_NAME
+        value: mechanical_library
+      - key: SECRET_KEY
+        generateValue: true
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ADMIN_USERNAME
+        value: nk28
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+    # Note: Free tier doesn't support persistent disks
+    # Files will be stored temporarily and uploaded files should use external storage
+    # For production, upgrade to paid tier or use cloud storage (S3, Cloudinary, etc.)
+
+  # Background Worker for Bot
+  - type: worker
+    name: mechanical-library-bot
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: "pip install --no-cache-dir --upgrade pip setuptools wheel && pip install --no-cache-dir -r bot/requirements.txt"
+    startCommand: "python bot/telegram_bot.py"
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+      - key: ADMIN_USERNAME
+        value: nk28
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
+
+databases:
+  # Note: Render doesn't provide free MongoDB, use MongoDB Atlas instead
+  # https://www.mongodb.com/cloud/atlas/register
+  
+# Note: For frontend, deploy separately to Vercel or Netlify (free static hosting)
+# Frontend cannot be deployed as a service on Render's free tier with the current setup
+# Use Vercel: https://vercel.com or Netlify: https://netlify.com

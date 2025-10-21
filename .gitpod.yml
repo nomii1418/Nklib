@@ -1,0 +1,21 @@
+# Gitpod Configuration
+tasks:
+  - name: Setup
+    init: |
+      bash setup.sh
+    command: |
+      bash start.sh
+
+ports:
+  - port: 3000
+    onOpen: open-preview
+    name: Frontend
+  - port: 8000
+    onOpen: notify
+    name: Backend API
+
+vscode:
+  extensions:
+    - ms-python.python
+    - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode

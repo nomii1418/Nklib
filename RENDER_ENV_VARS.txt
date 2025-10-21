@@ -1,0 +1,158 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║              RENDER ENVIRONMENT VARIABLES - COPY & PASTE             ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+🔧 BACKEND SERVICE (nklib-api)
+
+Add these 10 environment variables in Render:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 1: MONGODB_URL
+Value:
+mongodb+srv://nk:nk1418$K@cluster0.ffrsd03.mongodb.net/mechanical_library?retryWrites=true&w=majority&appName=Cluster0
+
+Note: If connection fails, try URL-encoded password:
+mongodb+srv://nk:nk1418%24K@cluster0.ffrsd03.mongodb.net/mechanical_library?retryWrites=true&w=majority&appName=Cluster0
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 2: TELEGRAM_BOT_TOKEN
+Value:
+(paste your token from @BotFather here)
+Example: 7364728191:AAGvH5xKz8pQwE_RtF2...
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 3: SECRET_KEY
+Value:
+(click "Generate" button in Render)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 4: DATABASE_NAME
+Value:
+mechanical_library
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 5: ADMIN_USERNAME
+Value:
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 6: ADMIN_PASSWORD
+Value:
+(choose a secure password - NOT "nom"!)
+Example: YourSecureName123
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 7: ADMIN_TELEGRAM_ID
+Value:
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 8: CLOUDINARY_CLOUD_NAME
+Value:
+(paste your cloud name from Cloudinary dashboard)
+Example: dxyz123
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 9: CLOUDINARY_API_KEY
+Value:
+(paste your API key from Cloudinary dashboard)
+Example: 123456789012345
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 10: CLOUDINARY_API_SECRET
+Value:
+(paste your API secret from Cloudinary dashboard)
+Example: abcdefghijklmnopqrstuvwxyz
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🤖 BOT WORKER (nklib-bot)
+
+Add these 5 environment variables:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 1: TELEGRAM_BOT_TOKEN
+Value:
+(same as backend)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 2: BACKEND_URL
+Value:
+https://nklib-api.onrender.com
+(use your actual backend URL after it deploys)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 3: ADMIN_USERNAME
+Value:
+nk28
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 4: ADMIN_PASSWORD
+Value:
+(same as backend)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Variable 5: ADMIN_TELEGRAM_ID
+Value:
+6056498996
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 NOTES:
+
+1. MongoDB password has $ symbol - should work as-is
+   If issues: Use %24 instead of $ in password
+
+2. Get Cloudinary credentials: https://cloudinary.com/console
+
+3. Get Bot Token: @BotFather on Telegram
+
+4. After deploying backend, add these 2 more variables:
+   FRONTEND_URL = https://nklib.vercel.app
+   BACKEND_URL = https://nklib-api.onrender.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CHECKLIST:
+
+Backend:
+[ ] MONGODB_URL
+[ ] TELEGRAM_BOT_TOKEN
+[ ] SECRET_KEY (generate)
+[ ] DATABASE_NAME
+[ ] ADMIN_USERNAME
+[ ] ADMIN_PASSWORD
+[ ] ADMIN_TELEGRAM_ID
+[ ] CLOUDINARY_CLOUD_NAME
+[ ] CLOUDINARY_API_KEY
+[ ] CLOUDINARY_API_SECRET
+
+Bot:
+[ ] TELEGRAM_BOT_TOKEN
+[ ] BACKEND_URL
+[ ] ADMIN_USERNAME
+[ ] ADMIN_PASSWORD
+[ ] ADMIN_TELEGRAM_ID
+
+After Deploy:
+[ ] FRONTEND_URL (backend)
+[ ] BACKEND_URL (backend)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎉 READY TO PASTE INTO RENDER!

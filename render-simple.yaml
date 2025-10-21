@@ -1,0 +1,55 @@
+services:
+  # Backend API
+  - type: web
+    name: nklib-api
+    env: python
+    runtime: python
+    plan: free
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: MONGODB_URL
+        sync: false
+      - key: DATABASE_NAME
+        value: mechanical_library
+      - key: SECRET_KEY
+        generateValue: true
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ADMIN_USERNAME
+        value: nk28
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+
+  # Bot Worker
+  - type: worker
+    name: nklib-bot
+    env: python
+    runtime: python
+    plan: free
+    buildCommand: pip install -r bot/requirements.txt
+    startCommand: python bot/telegram_bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+      - key: ADMIN_USERNAME
+        value: nk28
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADMIN_TELEGRAM_ID
+        value: "6056498996"
